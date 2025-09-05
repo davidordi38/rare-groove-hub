@@ -2,6 +2,7 @@ import { Home, Search, Library, Plus, Heart, Music } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
+import { NavLink } from "react-router-dom";
 
 const samplePlaylists = [
   "Ma playlist favorite",
@@ -23,17 +24,23 @@ export const Sidebar = () => {
         </div>
         
         <nav className="space-y-2">
-          <Button variant="ghost" className="w-full justify-start gap-3 hover:bg-player-hover">
-            <Home className="h-5 w-5" />
-            Accueil
+          <Button asChild variant="ghost" className="w-full justify-start gap-3 hover:bg-player-hover">
+            <NavLink to="/" className={({ isActive }) => isActive ? "bg-player-hover text-primary" : ""}>
+              <Home className="h-5 w-5" />
+              Accueil
+            </NavLink>
           </Button>
-          <Button variant="ghost" className="w-full justify-start gap-3 hover:bg-player-hover">
-            <Search className="h-5 w-5" />
-            Rechercher
+          <Button asChild variant="ghost" className="w-full justify-start gap-3 hover:bg-player-hover">
+            <NavLink to="/search" className={({ isActive }) => isActive ? "bg-player-hover text-primary" : ""}>
+              <Search className="h-5 w-5" />
+              Rechercher
+            </NavLink>
           </Button>
-          <Button variant="ghost" className="w-full justify-start gap-3 hover:bg-player-hover">
-            <Library className="h-5 w-5" />
-            Ma Bibliothèque
+          <Button asChild variant="ghost" className="w-full justify-start gap-3 hover:bg-player-hover">
+            <NavLink to="/library" className={({ isActive }) => isActive ? "bg-player-hover text-primary" : ""}>
+              <Library className="h-5 w-5" />
+              Ma Bibliothèque
+            </NavLink>
           </Button>
         </nav>
       </div>
