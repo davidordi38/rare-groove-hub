@@ -1,14 +1,8 @@
-import { Play, Heart, MoreHorizontal } from "lucide-react";
+import { Play, Heart, MoreHorizontal, Upload } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
-
-const featuredPlaylists = [
-  { title: "Hits du moment", description: "Les plus grands succès actuels", tracks: 50 },
-  { title: "Découvertes", description: "Nouveaux artistes à découvrir", tracks: 30 },
-  { title: "Rock Legends", description: "Les classiques du rock", tracks: 100 },
-  { title: "Chill Vibes", description: "Musique relaxante", tracks: 45 },
-];
+import { Input } from "@/components/ui/input";
 
 const recentTracks = [
   { title: "Song Title 1", artist: "Artist Name", album: "Album", duration: "3:45" },
@@ -38,32 +32,36 @@ export const MainContent = () => {
             <Play className="mr-2 h-4 w-4" />
             Lecture aléatoire
           </Button>
-          <Button variant="outline" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground">
-            Ajouter des musiques
-          </Button>
         </div>
 
-        {/* Featured Playlists */}
+        {/* Add Music Section */}
         <section className="space-y-4">
-          <h2 className="text-2xl font-semibold">Playlists en vedette</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {featuredPlaylists.map((playlist, index) => (
-              <Card key={index} className="bg-gradient-card border-border hover:bg-player-hover transition-colors group cursor-pointer shadow-card">
-                <CardContent className="p-6">
-                  <div className="aspect-square bg-gradient-primary rounded-lg mb-4 relative overflow-hidden">
-                    <div className="absolute inset-0 bg-black/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                      <Button size="sm" className="rounded-full bg-primary hover:scale-105 transition-transform">
-                        <Play className="h-4 w-4" />
-                      </Button>
-                    </div>
-                  </div>
-                  <h3 className="font-semibold mb-1">{playlist.title}</h3>
-                  <p className="text-sm text-muted-foreground mb-2">{playlist.description}</p>
-                  <p className="text-xs text-muted-foreground">{playlist.tracks} titres</p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
+          <h2 className="text-2xl font-semibold">Ajouter des musiques</h2>
+          <Card className="bg-gradient-card border-border shadow-card">
+            <CardContent className="p-6">
+              <div className="flex flex-col items-center justify-center space-y-4 py-8">
+                <div className="w-16 h-16 bg-gradient-primary rounded-full flex items-center justify-center">
+                  <Upload className="h-8 w-8 text-primary-foreground" />
+                </div>
+                <div className="text-center space-y-2">
+                  <h3 className="text-lg font-semibold">Uploadez vos fichiers audio</h3>
+                  <p className="text-muted-foreground">Formats supportés: MP3, WAV, FLAC</p>
+                </div>
+                <div className="w-full max-w-md">
+                  <Input
+                    type="file"
+                    accept=".mp3,.wav,.flac"
+                    multiple
+                    className="file:bg-gradient-primary file:text-primary-foreground file:border-0 file:rounded-md file:px-4 file:py-2 hover:file:opacity-90"
+                  />
+                </div>
+                <Button className="bg-gradient-primary hover:opacity-90">
+                  <Upload className="mr-2 h-4 w-4" />
+                  Uploader les fichiers
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
         </section>
 
         {/* Recent Tracks */}

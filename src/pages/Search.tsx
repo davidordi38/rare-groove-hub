@@ -1,23 +1,19 @@
-import { Search as SearchIcon, Filter, TrendingUp } from "lucide-react";
+import { Search as SearchIcon, Filter, Play, Heart, Plus, MoreHorizontal } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { AppLayout } from "@/layouts/AppLayout";
 
-const trendingSearches = [
-  "Jazz Fusion",
-  "Electro Chill",
-  "Rock Classique",
-  "Hip-Hop Français",
-  "Musique du Monde"
-];
-
-const recentSearches = [
-  "Daft Punk",
-  "Playlist été 2024",
-  "Ambient",
-  "Lo-fi beats"
+const allTracks = [
+  { title: "Bohemian Rhapsody", artist: "Queen", album: "A Night at the Opera", duration: "5:55" },
+  { title: "Hotel California", artist: "Eagles", album: "Hotel California", duration: "6:30" },
+  { title: "Stairway to Heaven", artist: "Led Zeppelin", album: "Led Zeppelin IV", duration: "8:02" },
+  { title: "Sweet Child O' Mine", artist: "Guns N' Roses", album: "Appetite for Destruction", duration: "5:03" },
+  { title: "Imagine", artist: "John Lennon", album: "Imagine", duration: "3:07" },
+  { title: "Billie Jean", artist: "Michael Jackson", album: "Thriller", duration: "4:54" },
+  { title: "Like a Rolling Stone", artist: "Bob Dylan", album: "Highway 61 Revisited", duration: "6:13" },
+  { title: "Purple Haze", artist: "Jimi Hendrix", album: "Are You Experienced", duration: "2:50" }
 ];
 
 const Search = () => {
@@ -51,37 +47,112 @@ const Search = () => {
 
         <TabsContent value="all" className="space-y-6">
           <div className="space-y-4">
-            <div className="flex items-center gap-2">
-              <TrendingUp className="h-5 w-5 text-primary" />
-              <h2 className="text-lg font-semibold">Tendances du moment</h2>
-            </div>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
-              {trendingSearches.map((term, index) => (
-                <Card key={index} className="bg-player-surface border-border hover:bg-player-hover cursor-pointer transition-colors">
-                  <CardContent className="p-4">
-                    <p className="text-sm font-medium">{term}</p>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </div>
-
-          <div className="space-y-4">
-            <h2 className="text-lg font-semibold">Recherches récentes</h2>
-            <div className="space-y-2">
-              {recentSearches.map((term, index) => (
-                <div key={index} className="flex items-center gap-3 p-2 rounded-md hover:bg-player-hover cursor-pointer">
-                  <SearchIcon className="h-4 w-4 text-muted-foreground" />
-                  <span className="text-sm">{term}</span>
+            <h2 className="text-lg font-semibold">Toutes les musiques</h2>
+            <Card className="bg-gradient-card border-border shadow-card">
+              <CardContent className="p-0">
+                <div className="space-y-1">
+                  {allTracks.map((track, index) => (
+                    <div
+                      key={index}
+                      className="flex items-center gap-4 p-4 hover:bg-player-hover transition-colors group cursor-pointer"
+                    >
+                      <Button
+                        size="sm"
+                        variant="ghost"
+                        className="h-8 w-8 p-0 opacity-0 group-hover:opacity-100 transition-opacity"
+                      >
+                        <Play className="h-4 w-4" />
+                      </Button>
+                      <div className="w-12 h-12 bg-gradient-primary rounded-md"></div>
+                      <div className="flex-1 min-w-0">
+                        <h4 className="font-medium truncate">{track.title}</h4>
+                        <p className="text-sm text-muted-foreground truncate">{track.artist}</p>
+                      </div>
+                      <div className="hidden md:block text-sm text-muted-foreground min-w-0 flex-1">
+                        {track.album}
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Button 
+                          variant="ghost" 
+                          size="sm" 
+                          className="h-8 w-8 p-0 opacity-0 group-hover:opacity-100 transition-opacity hover:text-primary"
+                          title="Ajouter à une playlist"
+                        >
+                          <Plus className="h-4 w-4" />
+                        </Button>
+                        <Button 
+                          variant="ghost" 
+                          size="sm" 
+                          className="h-8 w-8 p-0 opacity-0 group-hover:opacity-100 transition-opacity hover:text-primary"
+                          title="Ajouter aux favoris"
+                        >
+                          <Heart className="h-4 w-4" />
+                        </Button>
+                        <span className="text-sm text-muted-foreground">{track.duration}</span>
+                        <Button variant="ghost" size="sm" className="h-8 w-8 p-0 opacity-0 group-hover:opacity-100 transition-opacity">
+                          <MoreHorizontal className="h-4 w-4" />
+                        </Button>
+                      </div>
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
+              </CardContent>
+            </Card>
           </div>
         </TabsContent>
 
         <TabsContent value="tracks">
-          <div className="text-center py-12">
-            <p className="text-muted-foreground">Commencez à taper pour rechercher des titres...</p>
+          <div className="space-y-4">
+            <Card className="bg-gradient-card border-border shadow-card">
+              <CardContent className="p-0">
+                <div className="space-y-1">
+                  {allTracks.map((track, index) => (
+                    <div
+                      key={index}
+                      className="flex items-center gap-4 p-4 hover:bg-player-hover transition-colors group cursor-pointer"
+                    >
+                      <Button
+                        size="sm"
+                        variant="ghost"
+                        className="h-8 w-8 p-0 opacity-0 group-hover:opacity-100 transition-opacity"
+                      >
+                        <Play className="h-4 w-4" />
+                      </Button>
+                      <div className="w-12 h-12 bg-gradient-primary rounded-md"></div>
+                      <div className="flex-1 min-w-0">
+                        <h4 className="font-medium truncate">{track.title}</h4>
+                        <p className="text-sm text-muted-foreground truncate">{track.artist}</p>
+                      </div>
+                      <div className="hidden md:block text-sm text-muted-foreground min-w-0 flex-1">
+                        {track.album}
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Button 
+                          variant="ghost" 
+                          size="sm" 
+                          className="h-8 w-8 p-0 opacity-0 group-hover:opacity-100 transition-opacity hover:text-primary"
+                          title="Ajouter à une playlist"
+                        >
+                          <Plus className="h-4 w-4" />
+                        </Button>
+                        <Button 
+                          variant="ghost" 
+                          size="sm" 
+                          className="h-8 w-8 p-0 opacity-0 group-hover:opacity-100 transition-opacity hover:text-primary"
+                          title="Ajouter aux favoris"
+                        >
+                          <Heart className="h-4 w-4" />
+                        </Button>
+                        <span className="text-sm text-muted-foreground">{track.duration}</span>
+                        <Button variant="ghost" size="sm" className="h-8 w-8 p-0 opacity-0 group-hover:opacity-100 transition-opacity">
+                          <MoreHorizontal className="h-4 w-4" />
+                        </Button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
           </div>
         </TabsContent>
 
